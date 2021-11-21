@@ -91,7 +91,8 @@ public class Program {
 }
 ```
 this time [yanl](https://github.com/stardust-enterprises/yanl) will handle
-everything according to the NativeLoader's default settings.
+everything according to the [NativeLoader](https://github.com/stardust-enterprises/yanl/blob/trunk/src/main/kotlin/fr/stardustenterprises/yanl/loader/NativeLoader.kt)
+[default settings](#).
 
 you can of course change those setting by creating yourself a loader instance:
 ```java
@@ -99,4 +100,4 @@ you can of course change those setting by creating yourself a loader instance:
 ```
 
 # licensing
-this project is under the [MIT license](./LICENSE).
+this project is under the [MIT license](https://github.com/stardust-enterprises/yanl/blob/trunk/LICENSE).
