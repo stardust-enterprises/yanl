@@ -44,8 +44,8 @@ dependencies {
 ```
 
 # how work
-this library can act as a simple drop-in replacement to your standard
-`System.load` or `System.loadLibrary`. 
+this library can act as a simple drop-in 
+replacement from your standard `System.loadLibrary`. 
 
 consider the following example:
 ```java
