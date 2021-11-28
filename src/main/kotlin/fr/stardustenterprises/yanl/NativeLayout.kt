@@ -1,7 +1,7 @@
 package fr.stardustenterprises.yanl
 
 import fr.stardustenterprises.yanl.api.ILayout
-import fr.stardustenterprises.yanl.api.platform.PlatformContext
+import fr.stardustenterprises.yanl.api.platform.IContext
 import java.net.URI
 
 data class NativeLayout(
@@ -20,7 +20,7 @@ data class NativeLayout(
         @JvmStatic
         val HIERARCHICAL_LAYOUT = NativeLayout(
             "{os}/{arch}/{name}",
-            usePlatformPrefix = false,
+            usePlatformPrefix = true,
             usePlatformExtension = true
         )
     }
@@ -28,17 +28,17 @@ data class NativeLayout(
     override fun locateNative(
         rootPath: String,
         libraryName: String,
-        classLoader: ClassLoader,
-        platformContext: PlatformContext
-    ): URI {
-        val name = platformContext.populateName(libraryName, this.usePlatformPrefix, this.usePlatformExtension)
-        val formattedPath = platformContext.populatePath(this.pathFormat, name)
+        context: IContext
+    ): URI? {
+        val name = context.mapLibraryName(libraryName, this.usePlatformPrefix, this.usePlatformExtension)
+        val formattedPath = context.mapLibraryPath(this.pathFormat, name)
 
         val nativePath = (if (rootPath.startsWith('/')) "" else "/") +
                 rootPath +
                 (if (rootPath.endsWith('/')) "" else "/") +
                 formattedPath
 
-        return classLoader.getResource(nativePath)?.toURI() ?: throw IllegalArgumentException()
+        class WAClass
+        return WAClass::class.java.classLoader.getResource(nativePath)?.toURI()
     }
 }

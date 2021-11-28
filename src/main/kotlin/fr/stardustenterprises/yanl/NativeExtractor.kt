@@ -5,7 +5,7 @@ import java.net.URI
 import java.nio.file.Files
 import java.nio.file.Path
 
-object NativeExtractor : IExtractor {
+class NativeExtractor : IExtractor {
     private val tempHolder = Files.createTempDirectory("yanl_natives")
 
     override fun extractNative(
