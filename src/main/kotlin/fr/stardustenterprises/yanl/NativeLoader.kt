@@ -9,10 +9,9 @@ import fr.stardustenterprises.yanl.platform.PlatformFetcher
 class NativeLoader(
     private val root: String,
     private val layout: ILayout,
-    private val extractor: IExtractor,
-    contextProvider: () -> IContext
+    private val extractor: IExtractor
 ) {
-    private val context: IContext = contextProvider.invoke()
+    private val platform = Platform
 
     companion object {
         private val logger = Logger.getLogger(this::class.java)

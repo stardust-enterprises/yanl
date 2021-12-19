@@ -1,14 +1,15 @@
 package fr.stardustenterprises.yanl
 
+import fr.stardustenterprises.plat4k.EnumOperatingSystem
+import fr.stardustenterprises.plat4k.Platform
 import fr.stardustenterprises.yanl.api.ILayout
-import fr.stardustenterprises.yanl.api.platform.IContext
 import java.net.URI
 
 data class NativeLayout(
     private val pathFormat: String,
     private val usePlatformPrefix: Boolean,
     private val usePlatformExtension: Boolean
-): ILayout {
+) : ILayout {
     companion object {
         @JvmStatic
         val FLAT_LAYOUT = NativeLayout(
@@ -27,11 +28,13 @@ data class NativeLayout(
 
     override fun locateNative(
         rootPath: String,
-        libraryName: String,
-        context: IContext
+        libraryName: String
     ): URI? {
-        val name = context.mapLibraryName(libraryName, this.usePlatformPrefix, this.usePlatformExtension)
-        val formattedPath = context.mapLibraryPath(this.pathFormat, name)
+        val platform = Platform.current
+        val os = platform.operatingSystem
+
+        val name = os.mapLibraryName(libraryName, this.usePlatformPrefix, this.usePlatformExtension)
+        val formattedPath = platform.mapLibraryPath(this.pathFormat, name)
 
         val nativePath = (if (rootPath.startsWith('/')) "" else "/") +
                 rootPath +
@@ -42,3 +45,19 @@ data class NativeLayout(
         return WAClass::class.java.classLoader.getResource(nativePath)?.toURI()
     }
 }
+
+fun EnumOperatingSystem.mapLibraryName(
+    libraryName: String,
+    usePlatformPrefix: Boolean,
+    usePlatformExtension: Boolean
+): String =
+    (if (usePlatformPrefix) nativePrefix else "") + libraryName + (if (usePlatformExtension) nativeSuffix else "")
+
+const val OS = "{os}"
+const val ARCH = "{arch}"
+const val NAME = "{name}"
+
+fun Platform.mapLibraryPath(string: String, name: String): String =
+    string.replace(OS, operatingSystem.osName, true)
+        .replace(ARCH, architecture.identifier, true)
+        .replace(NAME, name, true)

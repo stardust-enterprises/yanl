@@ -9,7 +9,7 @@ val api = kotlin.sourceSets.create("api") {
 kotlin.sourceSets["main"].dependsOn(api)
 
 group = "fr.stardustenterprises"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -18,4 +18,9 @@ repositories {
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.0")
     implementation("org.slf4j:slf4j-api:1.7.32")
+
+    implementation("fr.stardustenterprises:plat4k:1.1.1")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
 }
