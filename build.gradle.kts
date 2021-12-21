@@ -25,7 +25,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.0")
     implementation("org.slf4j:slf4j-api:1.7.32")
 
-    implementation("fr.stardustenterprises:plat4k:1.1.2")
+    implementation("fr.stardustenterprises:plat4k:1.2.0")
 
     testImplementation(kotlin("test"))
 }
