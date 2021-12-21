@@ -1,32 +1,56 @@
 package fr.stardustenterprises.yanl
 
-import com.sun.istack.internal.logging.Logger
-import fr.stardustenterprises.yanl.api.IExtractor
-import fr.stardustenterprises.yanl.api.ILayout
-import fr.stardustenterprises.yanl.api.platform.IContext
-import fr.stardustenterprises.yanl.platform.PlatformFetcher
+import fr.stardustenterprises.yanl.api.Context
+import fr.stardustenterprises.yanl.api.Extractor
+import fr.stardustenterprises.yanl.api.Layout
+import fr.stardustenterprises.yanl.api.NativeNotFoundException
 
-class NativeLoader(
+class NativeLoader private constructor(
     private val root: String,
-    private val layout: ILayout,
-    private val extractor: IExtractor
+    private val layout: Layout,
+    private val extractor: Extractor,
+    private val context: Context
 ) {
-    private val platform = Platform
+    fun loadLibrary(libraryName: String, isOptional: Boolean = false) {
+        var uri = layout.locateNative(root, libraryName, context)
+        if (context.is64Bit()) {
+            val secondary = layout.locateNative(root, libraryName + "64", context)
+            if (secondary != null) {
+                uri = secondary
+            }
+        }
 
-    companion object {
-        private val logger = Logger.getLogger(this::class.java)
+        if (uri == null) {
+            if (!isOptional) {
+                throw NativeNotFoundException(libraryName)
+            }
+            return
+        }
 
-        @JvmStatic
-        fun getDefault() = NativeLoader(
-            "/META-INF/natives/",
-            NativeLayout.HIERARCHICAL_LAYOUT,
-            NativeExtractor(),
-            PlatformFetcher::provideContext
-        )
+        val path = extractor.extractNative(libraryName, uri)
+        System.loadLibrary(path.toAbsolutePath().toString())
     }
 
-    fun loadLibrary(libraryName: String) {
-        val uri = layout.locateNative(root, libraryName, context)
-        extractor.extractNative(libraryName, uri!!)
+    data class Builder(
+        var root: String = "/META-INF/natives",
+        var layout: Layout = NativeLayout.HIERARCHICAL_LAYOUT,
+        var extractor: Extractor = TempExtractor(),
+        var context: Context = PlatformContext()
+    ) {
+        fun root(root: String) = apply { this.root = root }
+
+        fun layout(layout: Layout) = apply { this.layout = layout }
+
+        fun layout(
+            pattern: String,
+            usePrefix: Boolean = true,
+            useSuffix: Boolean = true
+        ) = layout(NativeLayout(pattern, usePrefix, useSuffix))
+
+        fun extractor(extractor: Extractor) = apply { this.extractor = extractor }
+
+        fun context(context: Context) = apply { this.context = context }
+
+        fun build() = NativeLoader(root, layout, extractor, context)
     }
 }

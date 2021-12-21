@@ -1,11 +1,11 @@
 package fr.stardustenterprises.yanl
 
-import fr.stardustenterprises.yanl.api.IExtractor
+import fr.stardustenterprises.yanl.api.Extractor
 import java.net.URI
 import java.nio.file.Files
 import java.nio.file.Path
 
-class NativeExtractor : IExtractor {
+class TempExtractor : Extractor {
     private val tempHolder = Files.createTempDirectory("yanl_natives")
 
     override fun extractNative(

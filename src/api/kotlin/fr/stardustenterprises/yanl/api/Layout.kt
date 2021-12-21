@@ -2,9 +2,10 @@ package fr.stardustenterprises.yanl.api
 
 import java.net.URI
 
-interface ILayout {
+interface Layout {
     fun locateNative(
         rootPath: String,
-        libraryName: String
+        libraryName: String,
+        context: Context
     ): URI?
 }
