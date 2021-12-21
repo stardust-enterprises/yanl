@@ -4,24 +4,26 @@ import fr.stardustenterprises.plat4k.EnumArchitecture
 import fr.stardustenterprises.plat4k.EnumOperatingSystem
 import fr.stardustenterprises.yanl.api.Context
 
-class FakeLinuxContext(val arch: EnumArchitecture): Context {
-    override fun getOperatingSystem() = EnumOperatingSystem.LINUX.osName
+class FakeLinuxContext(arch: EnumArchitecture): Context {
+    override val osName = EnumOperatingSystem.LINUX.osName
+    override val archIdentifier = arch.identifier
+    override val is64Bits = true
 
-    override fun getArchitecture() = arch.identifier
-
-    override fun is64Bit() = true
-
-    override fun mapLibraryName(name: String, usePlatformPrefix: Boolean, usePlatformSuffix: Boolean) =
-        "lib$name.so"
+    override fun mapLibraryName(
+        name: String,
+        usePlatformPrefix: Boolean,
+        usePlatformSuffix: Boolean
+    ) = "lib$name.so"
 }
 
-class FakeWindowsContext(val arch: EnumArchitecture): Context {
-    override fun getOperatingSystem() = EnumOperatingSystem.WINDOWS.osName
+class FakeWindowsContext(arch: EnumArchitecture): Context {
+    override val osName = EnumOperatingSystem.WINDOWS.osName
+    override val archIdentifier = arch.identifier
+    override val is64Bits = true
 
-    override fun getArchitecture() = arch.identifier
-
-    override fun is64Bit() = true
-
-    override fun mapLibraryName(name: String, usePlatformPrefix: Boolean, usePlatformSuffix: Boolean) =
-        "$name.dll"
+    override fun mapLibraryName(
+        name: String,
+        usePlatformPrefix: Boolean,
+        usePlatformSuffix: Boolean
+    ) = "$name.dll"
 }

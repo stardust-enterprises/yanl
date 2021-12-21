@@ -1,7 +1,6 @@
 package fr.stardustenterprises.yanl
 
-import fr.stardustenterprises.yanl.api.Context
-import fr.stardustenterprises.yanl.api.Layout
+import fr.stardustenterprises.yanl.api.*
 import java.net.URI
 
 data class NativeLayout(
@@ -11,10 +10,10 @@ data class NativeLayout(
 ) : Layout {
     companion object {
         @JvmStatic
-        val FLAT_LAYOUT = NativeLayout("{name}")
+        val FLAT_LAYOUT = NativeLayout(NAME_FORMAT)
 
         @JvmStatic
-        val HIERARCHICAL_LAYOUT = NativeLayout("{os}/{arch}/{name}")
+        val HIERARCHICAL_LAYOUT = NativeLayout("$OS_FORMAT/$ARCH_FORMAT/$NAME_FORMAT")
     }
 
     override fun locateNative(
@@ -25,8 +24,15 @@ data class NativeLayout(
         val name = context.mapLibraryName(libraryName, this.usePlatformPrefix, this.usePlatformSuffix)
         val formattedPath = context.format(this.pathFormat, name)
 
-        val nativePath =
-            (if (rootPath.startsWith('/')) "" else "/") + rootPath + (if (rootPath.endsWith('/')) "" else "/") + formattedPath
+        var nativePath = ""
+
+        if (!rootPath.startsWith('/'))
+            nativePath += "/"
+        nativePath += rootPath
+
+        if (!rootPath.endsWith('/'))
+            nativePath += "/"
+        nativePath += formattedPath
 
         return NativeLayout::class.java.getResource(nativePath)?.toURI()
     }
