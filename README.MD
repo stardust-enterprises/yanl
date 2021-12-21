@@ -4,7 +4,7 @@ yet another native library loader and extractor for the [JVM][jvm], written in [
 
 # why
 
-other libraries simply don't fit my needs and/or are not as expandable/configurable as we would like.
+other libraries simply do not fit my needs and/or are not as expandable/configurable as I would like.
 
 # how use
 
@@ -59,7 +59,7 @@ and this is where [yanl][yanl] performs: we take care of platform detection, lib
 [//]: # (and even let you customize which version of the library you would
  want to load based on processor flags)
 
-taking back that previous example, let's see an extensive configuration:
+taking back that previous example, let us see an extensive configuration:
 
 ```java
 package your.project;
@@ -81,7 +81,8 @@ public class Program {
         .layout(NativeLayout.HIERARCHICAL_LAYOUT)
 
         // you can also only specify the layout's
-        // pattern, and it'll create it for you
+        // pattern, and it will automagically create
+        // it for you
         //.layout("{os}/{arch}/{name}")
 
         // set the extractor instance,
@@ -120,8 +121,8 @@ public class Program {
 # troubleshooting
 
 if you ever encounter any problem **related to the library**, you can [open an issue][new-issue] describing what the
-problem is. please, be as precise as you can, so that we can help you asap. we're most likely to close the issue if it
-isn't related to our work.
+problem is. please, be as precise as you can, so that we can help you asap. we are most likely to close the issue if it
+is not related to our work.
 
 # contributing
 
