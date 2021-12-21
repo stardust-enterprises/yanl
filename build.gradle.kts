@@ -41,9 +41,8 @@ val sourcesJar by tasks.registering(Jar::class) {
 
 val javadocJar by tasks.registering(Jar::class) {
     archiveClassifier.set("javadoc")
-    val javadoc = tasks.named("dokkaHtml")
-    dependsOn(javadoc)
-    from(javadoc.get().outputs)
+    dependsOn(tasks.dokkaHtml)
+    from(tasks.dokkaHtml)
 }
 
 artifacts {
@@ -53,8 +52,8 @@ artifacts {
 
 val libraryName = "yanl"
 val desc = "Yet another Native library extractor/loader for the JVM."
-val dev = "xtrm"
-val repo = "stardust-enterprises/yanl"
+val devs = arrayOf("xtrm", "lambdagg")
+val repo = "stardust-enterprises/$libraryName"
 
 publishing {
     publications {
@@ -75,9 +74,11 @@ publishing {
                     }
                 }
                 developers {
-                    developer {
-                        id.set(dev)
-                        name.set(dev)
+                    devs.forEach {
+                        developer {
+                            id.set(it)
+                            name.set(it)
+                        }
                     }
                 }
                 scm {
@@ -89,14 +90,11 @@ publishing {
         }
     }
 
-    val NEXUS_USERNAME: String by project
-    val NEXUS_PASSWORD: String by project
-
     repositories {
         maven {
             credentials {
-                username = NEXUS_USERNAME
-                password = NEXUS_PASSWORD
+                username = project.properties["NEXUS_USERNAME"] as? String
+                password = project.properties["NEXUS_PASSWORD"] as? String
             }
 
             name = "Sonatype"
