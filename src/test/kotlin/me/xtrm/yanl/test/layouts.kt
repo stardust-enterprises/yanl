@@ -18,7 +18,6 @@ const val root2 = "/layout2"
 val layout2 = NativeLayout.FLAT_LAYOUT
 
 internal class LayoutTests {
-
     @Test
     fun `library1 not found on provided architecture`() =
         Assertions.assertNull(layout1.locateNative(root1, libName, linMips64))
@@ -46,5 +45,4 @@ internal class LayoutTests {
     @Test
     fun `library2 extended name found`() =
         Assertions.assertNotNull(layout2.locateNative(root2, "${libName}64", lin64))
-
 }

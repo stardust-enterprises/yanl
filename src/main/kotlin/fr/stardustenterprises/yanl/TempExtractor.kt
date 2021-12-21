@@ -6,19 +6,16 @@ import java.nio.file.Files
 import java.nio.file.Path
 
 class TempExtractor : Extractor {
-    private val tempHolder = Files.createTempDirectory("yanl_natives")
+    private val tempDir = Files.createTempDirectory("yanl_natives")
 
     override fun extractNative(
         nativeFilename: String,
         resourceUri: URI
     ): Path {
-        val path = tempHolder.resolve(nativeFilename)
+        val path = tempDir.resolve(nativeFilename)
 
-        if(!Files.exists(path)) {
-            val url = resourceUri.toURL()
-            val inputStream = url.openStream()
-
-            Files.copy(inputStream, path)
+        if (!Files.exists(path)) {
+            Files.copy(resourceUri.toURL().openStream(), path)
         }
 
         return path
