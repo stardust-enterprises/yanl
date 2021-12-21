@@ -1,5 +1,4 @@
-# yanl - yet another native loader 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/fr.stardustenterprises/yanl/badge.svg)](https://maven-badges.herokuapp.com/maven-central/fr.stardustenterprises/yanl)
+# yanl - yet another native loader [![Maven Central](https://maven-badges.herokuapp.com/maven-central/fr.stardustenterprises/yanl/badge.svg)](https://maven-badges.herokuapp.com/maven-central/fr.stardustenterprises/yanl)
 
 Yet another Native library extractor/loader for the 
 [JVM](https://adoptium.net), written in [Kotlin](https://kotlinlang.org).
