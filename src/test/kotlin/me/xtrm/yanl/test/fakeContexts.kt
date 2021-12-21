@@ -11,18 +11,17 @@ class FakeLinuxContext(val arch: EnumArchitecture): Context {
 
     override fun is64Bit() = true
 
-    override fun mapLibraryName(name: String, usePlatformPrefix: Boolean, usePlatformSuffix: Boolean): String {
-        return "lib$name.so"
-    }
+    override fun mapLibraryName(name: String, usePlatformPrefix: Boolean, usePlatformSuffix: Boolean) =
+        "lib$name.so"
 }
 
 class FakeWindowsContext(val arch: EnumArchitecture): Context {
-    override fun getOperatingSystem(): String = EnumOperatingSystem.WINDOWS.osName
+    override fun getOperatingSystem() = EnumOperatingSystem.WINDOWS.osName
 
-    override fun getArchitecture(): String = arch.identifier
+    override fun getArchitecture() = arch.identifier
 
     override fun is64Bit() = true
 
-    override fun mapLibraryName(name: String, usePlatformPrefix: Boolean, usePlatformSuffix: Boolean): String =
+    override fun mapLibraryName(name: String, usePlatformPrefix: Boolean, usePlatformSuffix: Boolean) =
         "$name.dll"
 }
