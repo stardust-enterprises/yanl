@@ -29,7 +29,7 @@ class NativeLoader private constructor(
         }
 
         val path = extractor.extractNative(libraryName, uri)
-        System.loadLibrary(path.toAbsolutePath().toString())
+        System.load(path.toAbsolutePath().toString())
     }
 
     data class Builder(
