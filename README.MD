@@ -1,4 +1,5 @@
-# yanl - yet another native loader [![Maven Central][badge-mvnc]][yanl-mvnc]
+# yanl - yet another native loader
+[![Build][badge-github-ci]][yanl-gradle-ci] [![Maven Central][badge-mvnc]][yanl-mvnc]
 
 yet another native library loader and extractor for the [JVM][jvm], written in [Kotlin][kotlin].
 
@@ -155,6 +156,8 @@ this project is under the [ISC license][blob-license].
 
 [yanl-mvnc]: https://maven-badges.herokuapp.com/maven-central/fr.stardustenterprises/yanl "maven central repository"
 
+[yanl-gradle-ci]: https://github.com/stardust-enterprises/yanl/actions/workflows/gradle-ci.yml "gradle ci workflow"
+
 [blob-license]: https://github.com/stardust-enterprises/yanl/blob/trunk/LICENSE "LICENSE source file"
 
 [blob-native-loader]: https://github.com/stardust-enterprises/yanl/blob/trunk/src/main/kotlin/fr/stardustenterprises/yanl/NativeLoader.kt "NativeLoader.kt source file"
@@ -162,3 +165,5 @@ this project is under the [ISC license][blob-license].
 <!-- Badges -->
 
 [badge-mvnc]: https://maven-badges.herokuapp.com/maven-central/fr.stardustenterprises/yanl/badge.svg "maven central badge"
+
+[badge-github-ci]: https://github.com/stardust-enterprises/yanl/actions/workflows/gradle-ci.yml/badge.svg?branch=trunk "github actions badge"
