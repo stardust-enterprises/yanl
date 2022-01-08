@@ -14,7 +14,7 @@ you can import [yanl][yanl] from [maven central][mvnc] just by adding it to your
 
 ```kotlin
 dependencies {
-    implementation("fr.stardustenterprises:yanl:0.4.0")
+    implementation("fr.stardustenterprises:yanl:{VERSION}")
 }
 ```
 
@@ -25,7 +25,7 @@ dependencies {
 <dependency>
     <groupId>fr.stardustenterprises</groupId>
     <artifactId>yanl</artifactId>
-    <version>0.4.0</version>
+    <version>{VERSION}</version>
 </dependency>
 ```
 
@@ -70,7 +70,9 @@ import fr.stardustenterprises.yanl.PlatformContext;
 import fr.stardustenterprises.yanl.TempExtractor;
 
 public class Program {
-    private static final NativeLoader nativeLoader = new NativeLoader.Builder()
+    private static final NativeLoader nativeLoader =
+        new NativeLoader.Builder()
+
         // this tells the loader to look for libraries
         // in the /META-INF/natives directory
         .root("/META-INF/natives")
@@ -114,7 +116,8 @@ package your.project;
 import fr.stardustenterprises.yanl.NativeLoader;
 
 public class Program {
-    private static final NativeLoader defaultLoader = new NativeLoader.Builder().build();
+    private static final NativeLoader defaultLoader =
+        new NativeLoader.Builder().build();
 }
 ```
 

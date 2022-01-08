@@ -1,21 +1,39 @@
-@file:Suppress("LocalVariableName")
+@file:Suppress("LocalVariableName", "UNUSED_VARIABLE")
+
+import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.6.0"
     `java-library`
+    kotlin("jvm") version "1.6.0"
+    id("org.jetbrains.dokka") version "1.6.0"
     `maven-publish`
     signing
-    id("org.jetbrains.dokka") version "1.6.0"
+    id("io.github.gradle-nexus.publish-plugin") version "1.0.0"
 }
 
-val api = kotlin.sourceSets.create("api") {
-    kotlin.srcDir("src/api/kotlin")
-    resources.srcDir("src/api/resources")
+sourceSets {
+    val main by getting
+    val test by getting
+
+    val api by creating {
+        java {
+            srcDir("src/api/kotlin")
+            resources.srcDir("src/api/resources")
+        }
+
+        this.compileClasspath += main.compileClasspath
+        this.runtimeClasspath += main.runtimeClasspath
+    }
+
+    listOf(main, test).forEach {
+        it.compileClasspath += api.output
+        it.runtimeClasspath += api.output
+    }
 }
-kotlin.sourceSets["main"].dependsOn(api)
 
 group = "fr.stardustenterprises"
-version = "0.4.0"
+version = "0.4.1"
 
 repositories {
     mavenCentral()
@@ -25,18 +43,43 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.0")
     implementation("org.slf4j:slf4j-api:1.7.32")
 
-    implementation("fr.stardustenterprises:plat4k:1.2.0")
+    implementation("fr.stardustenterprises:plat4k:1.3.0")
 
     testImplementation(kotlin("test"))
 }
 
-tasks.test {
-    useJUnitPlatform()
+tasks {
+    test {
+        useJUnitPlatform()
+    }
+
+    withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = "1.8"
+    }
+
+    val dokkaHtml by getting(DokkaTask::class) {
+        dokkaSourceSets {
+            configureEach {
+                sourceRoots.from(file("src/api/kotlin"))
+                skipDeprecated.set(true)
+            }
+        }
+    }
+
+    jar {
+        from(sourceSets["api"].output)
+    }
+}
+
+val apiJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("api")
+    from(sourceSets["api"].output)
 }
 
 val sourcesJar by tasks.registering(Jar::class) {
     archiveClassifier.set("sources")
-    from(sourceSets.main.get().allSource)
+    from(sourceSets["main"].allSource)
+    from(sourceSets["api"].allSource)
 }
 
 val javadocJar by tasks.registering(Jar::class) {
@@ -46,14 +89,15 @@ val javadocJar by tasks.registering(Jar::class) {
 }
 
 artifacts {
+    archives(apiJar)
     archives(sourcesJar)
     archives(javadocJar)
 }
 
-val libraryName = "yanl"
+val projectName = project.name
 val desc = "Yet another Native library extractor/loader for the JVM."
 val devs = arrayOf("xtrm", "lambdagg")
-val repo = "stardust-enterprises/$libraryName"
+val repo = "stardust-enterprises/$projectName"
 
 publishing {
     publications {
@@ -63,7 +107,7 @@ publishing {
             artifact(javadocJar.get())
 
             pom {
-                name.set(libraryName)
+                name.set(projectName)
                 description.set(desc)
                 url.set("https://github.com/$repo")
                 licenses {
@@ -89,16 +133,16 @@ publishing {
             }
         }
     }
+}
 
+nexusPublishing {
     repositories {
-        maven {
-            credentials {
-                username = project.properties["NEXUS_USERNAME"] as? String
-                password = project.properties["NEXUS_PASSWORD"] as? String
-            }
+        sonatype {
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
 
-            name = "Sonatype"
-            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+            username.set(project.properties["NEXUS_USERNAME"] as? String ?: return@sonatype)
+            password.set(project.properties["NEXUS_PASSWORD"] as? String ?: return@sonatype)
         }
     }
 }
