@@ -33,7 +33,7 @@ sourceSets {
 }
 
 group = "fr.stardustenterprises"
-version = "0.4.1"
+version = "0.4.2"
 
 repositories {
     mavenCentral()
@@ -103,6 +103,7 @@ publishing {
     publications {
         register("mavenJava", MavenPublication::class) {
             from(components["java"])
+            artifact(apiJar.get())
             artifact(sourcesJar.get())
             artifact(javadocJar.get())
 
