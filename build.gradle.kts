@@ -1,5 +1,3 @@
-@file:Suppress("LocalVariableName", "UNUSED_VARIABLE")
-
 plugins {
     `java-library`
     kotlin("jvm")
