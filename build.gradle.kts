@@ -101,21 +101,22 @@ val artifactTasks = arrayOf(
 )
 
 artifacts {
-    artifactTasks.forEach { archives(it) }
+    artifactTasks.forEach(::archives)
 }
 
-val desc = "Yet another Native library extractor/loader for the JVM."
+val projectName = project.name
+val desc = "Yet Another Native Library loader and extractor for the JVM."
 val authors = arrayOf("xtrm", "lambdagg")
-val repo = "stardust-enterprises/${project.name}"
+val repo = "stardust-enterprises/$projectName"
 
 publishing.publications {
     // Sets up the Maven integration.
     register("mavenJava", MavenPublication::class) {
         from(components["java"])
-        artifactTasks.forEach { artifact(it) }
+        artifactTasks.forEach(::artifact)
 
         pom {
-            name.set(project.name)
+            name.set(projectName)
             description.set(desc)
             url.set("https://github.com/$repo")
 
