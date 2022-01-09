@@ -3,20 +3,45 @@ package fr.stardustenterprises.yanl
 import fr.stardustenterprises.yanl.api.*
 import java.net.URI
 
+/**
+ * The YANL native layout implementation, following the [Layout] interface.
+ *
+ * @author xtrm
+ * @see Layout
+ */
 data class NativeLayout(
+    /**
+     * The format to use for locating the native.
+     */
     private val pathFormat: String,
+
+    /**
+     * Whether to use the platform prefix.
+     */
     private val usePlatformPrefix: Boolean = true,
+
+    /**
+     * Whether to use the platform suffix.
+     */
     private val usePlatformSuffix: Boolean = true
 ) : Layout {
     companion object {
+        /**
+         * A flat native layout, consisting in only the name format.
+         */
         @JvmStatic
         val FLAT_LAYOUT = NativeLayout(NAME_FORMAT)
 
+        /**
+         * A hierarchical native layout, consisting in the OS, arch and name
+         * formats.
+         */
         @JvmStatic
-        val HIERARCHICAL_LAYOUT = NativeLayout("$OS_FORMAT/$ARCH_FORMAT/$NAME_FORMAT")
+        val HIERARCHICAL_LAYOUT =
+            NativeLayout("$OS_FORMAT/$ARCH_FORMAT/$NAME_FORMAT")
     }
 
-    override fun locateNative(
+    override fun locateLibrary(
         rootPath: String,
         libraryName: String,
         context: Context
@@ -34,6 +59,6 @@ data class NativeLayout(
             nativePath += "/"
         nativePath += formattedPath
 
-        return NativeLayout::class.java.getResource(nativePath)?.toURI()
+        return javaClass.getResource(nativePath)?.toURI()
     }
 }
