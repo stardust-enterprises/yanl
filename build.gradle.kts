@@ -69,12 +69,16 @@ tasks {
 
     // API artifact, only including the output of the API source.
     val apiJar by creating(Jar::class) {
+        group = "build"
+
         archiveClassifier.set("api")
         from(sourceSets["api"].output)
     }
 
     // Javadoc artifact, including everything Dokka creates.
     val javadocJar by creating(Jar::class) {
+        group = "build"
+
         archiveClassifier.set("javadoc")
         dependsOn(dokkaHtml)
         from(dokkaHtml)
@@ -82,6 +86,8 @@ tasks {
 
     // Source artifact, including everything the 'main' does but not compiled.
     val sourcesJar by creating(Jar::class) {
+        group = "build"
+
         archiveClassifier.set("sources")
         from(sourceSets["main"].allSource)
         from(sourceSets["api"].allSource)
