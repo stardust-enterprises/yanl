@@ -111,7 +111,7 @@ val repo = "stardust-enterprises/$projectName"
 
 publishing.publications {
     // Sets up the Maven integration.
-    register("mavenJava", MavenPublication::class) {
+    create<MavenPublication>("mavenJava") {
         from(components["java"])
         artifactTasks.forEach(::artifact)
 
