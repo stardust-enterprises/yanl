@@ -4,6 +4,9 @@ import fr.stardustenterprises.plat4k.EnumArchitecture
 import fr.stardustenterprises.plat4k.EnumOperatingSystem
 import fr.stardustenterprises.yanl.api.Context
 
+/**
+ * A fake Linux context made in order to unit-test the project.
+ */
 class FakeLinuxContext(arch: EnumArchitecture): Context {
     override val osName = EnumOperatingSystem.LINUX.osName
     override val archIdentifier = arch.identifier
@@ -13,9 +16,12 @@ class FakeLinuxContext(arch: EnumArchitecture): Context {
         name: String,
         usePlatformPrefix: Boolean,
         usePlatformSuffix: Boolean
-    ) = "lib$name.so"
+    ) = "lib$name.so"  // On Linux, the libraries are formatted like this.
 }
 
+/**
+ * A fake Windows context made in order to unit-test the project.
+ */
 class FakeWindowsContext(arch: EnumArchitecture): Context {
     override val osName = EnumOperatingSystem.WINDOWS.osName
     override val archIdentifier = arch.identifier
@@ -25,5 +31,5 @@ class FakeWindowsContext(arch: EnumArchitecture): Context {
         name: String,
         usePlatformPrefix: Boolean,
         usePlatformSuffix: Boolean
-    ) = "$name.dll"
+    ) = "$name.dll"  // On Windows, the libraries are formatted like that.
 }

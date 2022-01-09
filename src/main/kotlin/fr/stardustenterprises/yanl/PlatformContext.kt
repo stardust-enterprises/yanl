@@ -4,17 +4,32 @@ import fr.stardustenterprises.plat4k.EnumArchitecture
 import fr.stardustenterprises.plat4k.EnumOperatingSystem
 import fr.stardustenterprises.plat4k.Platform
 import fr.stardustenterprises.yanl.api.Context
+import fr.stardustenterprises.yanl.api.UnsupportedPlatformException
 
+/**
+ * The YANL platform context implementation, following the [Context] interface.
+ *
+ * @author xtrm
+ * @see Context
+ */
 open class PlatformContext : Context {
+    /**
+     * The [plat4k.Platform](fr.stardustenterprises.plat4k.Platform) associated
+     * to this context.
+     *
+     * @see Platform
+     */
     val platform = Platform.current
 
     init {
+        val (operatingSystem, architecture) = platform
+
         if (
-            platform.operatingSystem == EnumOperatingSystem.UNKNOWN ||
-            platform.architecture == EnumArchitecture.UNKNOWN
+            operatingSystem == EnumOperatingSystem.UNKNOWN ||
+            architecture == EnumArchitecture.UNKNOWN
         ) {
-            throw RuntimeException(
-                "Could not find platform OS and/or Arch!"
+            throw UnsupportedPlatformException(
+                "OS: ${operatingSystem.osName}, arch: ${architecture.identifier}"
             )
         }
     }

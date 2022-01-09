@@ -17,32 +17,43 @@ val layout1 = NativeLayout.HIERARCHICAL_LAYOUT
 const val root2 = "/layout2"
 val layout2 = NativeLayout.FLAT_LAYOUT
 
-internal class LayoutTests {
+/**
+ * Holds the unit tests that ensure the project works.
+ */
+class LayoutTests {
     @Test
     fun `library1 not found on provided architecture`() =
-        Assertions.assertNull(layout1.locateNative(root1, libName, linMips64))
+        Assertions.assertNull(layout1.locateLibrary(root1, libName, linMips64))
 
     @Test
     fun `library1 found on provided architecture`() =
-        Assertions.assertNotNull(layout1.locateNative(root1, libName, winAarch64))
+        Assertions.assertNotNull(
+            layout1.locateLibrary(root1, libName, winAarch64)
+        )
 
     @Test
     fun `library1 base name not found`() =
-        Assertions.assertNull(layout1.locateNative(root1, libName, lin64))
+        Assertions.assertNull(layout1.locateLibrary(root1, libName, lin64))
 
     @Test
     fun `library1 extended name found`() =
-        Assertions.assertNotNull(layout1.locateNative(root1, "${libName}64", lin64))
+        Assertions.assertNotNull(
+            layout1.locateLibrary(root1, "${libName}64", lin64)
+        )
 
     @Test
     fun `library2 found on provided architecture`() =
-        Assertions.assertNotNull(layout2.locateNative(root2, "${libName}64", winAarch64))
+        Assertions.assertNotNull(
+            layout2.locateLibrary(root2, "${libName}64", winAarch64)
+        )
 
     @Test
     fun `library2 base name found`() =
-        Assertions.assertNotNull(layout2.locateNative(root2, libName, lin64))
+        Assertions.assertNotNull(layout2.locateLibrary(root2, libName, lin64))
 
     @Test
     fun `library2 extended name found`() =
-        Assertions.assertNotNull(layout2.locateNative(root2, "${libName}64", lin64))
+        Assertions.assertNotNull(
+            layout2.locateLibrary(root2, "${libName}64", lin64)
+        )
 }

@@ -5,14 +5,24 @@ import java.net.URI
 import java.nio.file.Files
 import java.nio.file.Path
 
+/**
+ * The YANL native extractor implementation, following the [Extractor]
+ * interface.
+ *
+ * @author xtrm
+ * @see Extractor
+ */
 class TempExtractor : Extractor {
+    /**
+     * The temporary directory where the YANL natives will reside.
+     */
     private val tempDir = Files.createTempDirectory("yanl_natives")
 
-    override fun extractNative(
-        nativeFilename: String,
+    override fun extractLibrary(
+        libraryFile: String,
         resourceUri: URI
     ): Path {
-        val path = tempDir.resolve(nativeFilename)
+        val path = tempDir.resolve(libraryFile)
 
         if (!Files.exists(path)) {
             Files.copy(resourceUri.toURL().openStream(), path)
