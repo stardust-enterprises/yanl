@@ -1,3 +1,5 @@
+import java.net.URL
+
 plugins {
     `java-library`
     kotlin("jvm")
@@ -28,7 +30,11 @@ sourceSets {
 }
 
 group = "fr.stardustenterprises"
+val projectName = project.name
 version = "0.5.0"
+val desc = "Yet Another Native Library loader and extractor for the JVM."
+val authors = arrayOf("xtrm", "lambdagg")
+val repo = "stardust-enterprises/$projectName"
 
 repositories {
     mavenCentral()
@@ -48,9 +54,46 @@ tasks {
     }
 
     dokkaHtml {
+        val moduleFile = File(projectDir, "MODULE.temp.MD")
+
+        run {
+            // In order to have a description on the rendered docs, we have to have
+            // a file with the # Module thingy in it. That's what we're
+            // automagically creating here.
+
+            doFirst {
+                moduleFile.writeText("# Module $projectName\n$desc")
+            }
+
+            doLast {
+                moduleFile.delete()
+            }
+        }
+
+        moduleName.set(projectName)
+
         dokkaSourceSets.configureEach {
+            displayName.set("$projectName github")
+            includes.from(moduleFile.path)
+
+            skipDeprecated.set(false)
+            includeNonPublic.set(false)
+            skipEmptyPackages.set(true)
+            reportUndocumented.set(true)
+
             sourceRoots.from(file("src/api/kotlin"))
-            skipDeprecated.set(true)
+
+            // Link the source to the documentation
+            sourceLink {
+                localDirectory.set(file("src"))
+                remoteUrl.set(URL("https://github.com/$repo/tree/trunk/src"))
+            }
+
+            // Plat4k external documentation links
+            externalDocumentationLink {
+                packageListUrl.set(URL("https://stardust-enterprises.github.io/plat4k/plat4k/package-list"))
+                url.set(URL("https://stardust-enterprises.github.io/plat4k/"))
+            }
         }
     }
 
@@ -101,11 +144,6 @@ val artifactTasks = arrayOf(
 artifacts {
     artifactTasks.forEach(::archives)
 }
-
-val projectName = project.name
-val desc = "Yet Another Native Library loader and extractor for the JVM."
-val authors = arrayOf("xtrm", "lambdagg")
-val repo = "stardust-enterprises/$projectName"
 
 publishing.publications {
     // Sets up the Maven integration.
