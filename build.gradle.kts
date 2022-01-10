@@ -1,4 +1,4 @@
-@file:Suppress("UNUSED_VARIABLE")
+import java.net.URL
 
 plugins {
     `java-library`
@@ -30,7 +30,11 @@ sourceSets {
 }
 
 group = "fr.stardustenterprises"
-version = "0.5.0"
+val projectName = project.name
+version = "0.6.0"
+val desc = "Yet Another Native Library loader and extractor for the JVM."
+val authors = arrayOf("xtrm", "lambdagg")
+val repo = "stardust-enterprises/$projectName"
 
 repositories {
     mavenCentral()
@@ -39,7 +43,7 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.slf4j:slf4j-api:1.7.32")
-    implementation("fr.stardustenterprises:plat4k:1.3.0")
+    implementation("fr.stardustenterprises:plat4k:1.4.0")
 
     testImplementation(kotlin("test"))
 }
@@ -50,9 +54,46 @@ tasks {
     }
 
     dokkaHtml {
+        val moduleFile = File(projectDir, "MODULE.temp.MD")
+
+        run {
+            // In order to have a description on the rendered docs, we have to have
+            // a file with the # Module thingy in it. That's what we're
+            // automagically creating here.
+
+            doFirst {
+                moduleFile.writeText("# Module $projectName\n$desc")
+            }
+
+            doLast {
+                moduleFile.delete()
+            }
+        }
+
+        moduleName.set(projectName)
+
         dokkaSourceSets.configureEach {
+            displayName.set("$projectName github")
+            includes.from(moduleFile.path)
+
+            skipDeprecated.set(false)
+            includeNonPublic.set(false)
+            skipEmptyPackages.set(true)
+            reportUndocumented.set(true)
+
             sourceRoots.from(file("src/api/kotlin"))
-            skipDeprecated.set(true)
+
+            // Link the source to the documentation
+            sourceLink {
+                localDirectory.set(file("src"))
+                remoteUrl.set(URL("https://github.com/$repo/tree/trunk/src"))
+            }
+
+            // Plat4k external documentation links
+            externalDocumentationLink {
+                packageListUrl.set(URL("https://stardust-enterprises.github.io/plat4k/plat4k/package-list"))
+                url.set(URL("https://stardust-enterprises.github.io/plat4k/"))
+            }
         }
     }
 
@@ -68,29 +109,29 @@ tasks {
     }
 
     // API artifact, only including the output of the API source.
-    val apiJar by creating(Jar::class) {
+    create("apiJar", Jar::class) {
         group = "build"
 
         archiveClassifier.set("api")
         from(sourceSets["api"].output)
     }
 
-    // Javadoc artifact, including everything Dokka creates.
-    val javadocJar by creating(Jar::class) {
-        group = "build"
-
-        archiveClassifier.set("javadoc")
-        dependsOn(dokkaHtml)
-        from(dokkaHtml)
-    }
-
     // Source artifact, including everything the 'main' does but not compiled.
-    val sourcesJar by creating(Jar::class) {
+    create("sourcesJar", Jar::class) {
         group = "build"
 
         archiveClassifier.set("sources")
         from(sourceSets["main"].allSource)
         from(sourceSets["api"].allSource)
+    }
+
+    // Javadoc artifact, including everything Dokka creates.
+    create("javadocJar", Jar::class) {
+        group = "build"
+
+        archiveClassifier.set("javadoc")
+        dependsOn(dokkaHtml)
+        from(dokkaHtml)
     }
 }
 
@@ -103,11 +144,6 @@ val artifactTasks = arrayOf(
 artifacts {
     artifactTasks.forEach(::archives)
 }
-
-val projectName = project.name
-val desc = "Yet Another Native Library loader and extractor for the JVM."
-val authors = arrayOf("xtrm", "lambdagg")
-val repo = "stardust-enterprises/$projectName"
 
 publishing.publications {
     // Sets up the Maven integration.

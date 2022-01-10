@@ -1,6 +1,7 @@
 package fr.stardustenterprises.yanl
 
 import fr.stardustenterprises.plat4k.EnumArchitecture
+import fr.stardustenterprises.plat4k.EnumCPUType
 import fr.stardustenterprises.plat4k.EnumOperatingSystem
 import fr.stardustenterprises.plat4k.Platform
 import fr.stardustenterprises.yanl.api.Context
@@ -12,14 +13,14 @@ import fr.stardustenterprises.yanl.api.UnsupportedPlatformException
  * @author xtrm
  * @see Context
  */
-open class PlatformContext : Context {
+class PlatformContext : Context {
     /**
      * The [plat4k.Platform](fr.stardustenterprises.plat4k.Platform) associated
      * to this context.
      *
      * @see Platform
      */
-    val platform = Platform.current
+    private val platform = Platform.currentPlatform
 
     init {
         val (operatingSystem, architecture) = platform
@@ -36,7 +37,7 @@ open class PlatformContext : Context {
 
     override val osName = platform.operatingSystem.osName
     override val archIdentifier = platform.architecture.identifier
-    override val is64Bits = platform.architecture.bits == 64.toShort()
+    override val is64Bits = platform.architecture.cpuType == EnumCPUType.X64
 
     override fun mapLibraryName(
         name: String,

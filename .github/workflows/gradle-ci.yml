@@ -1,16 +1,20 @@
-# This workflow will build a Java project with Gradle
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+name: Build and generate docs
 
-name: Build
-
-on: [push, pull_request]
+on:
+    push:
+        branches-ignore:
+            - docs
+    pull_request:
+    workflow_dispatch:
 
 jobs:
     build:
-        runs-on: ubuntu-20.04
+        runs-on: [ubuntu-latest]
 
         steps:
             - uses: actions/checkout@v2
+              with:
+                  persist-credentials: false
 
             - name: Set up JDK 1.8
               uses: actions/setup-java@v1
@@ -18,8 +22,21 @@ jobs:
                   java-package: jdk
                   java-version: 1.8
 
-            - name: Grant execute permission for gradlew
-              run: chmod +x gradlew
+            - name: Build using Gradle
+              run: |
+                  chmod +x gradlew
+                  ./gradlew build
 
-            - name: Build with Gradle
-              run: ./gradlew build
+            - name: Extract branch name
+              id: extract_branch
+              if: github.event_name == 'push'
+              run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+
+            - name: Deploy documentation
+              if: github.event_name == 'push'
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./build/dokka/html
+                  publish_branch: docs-${{ steps.extract_branch.outputs.branch }}
+                  force_orphan: true
