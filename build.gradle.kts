@@ -31,7 +31,7 @@ sourceSets {
 
 group = "fr.stardustenterprises"
 val projectName = project.name
-version = "0.5.0"
+version = "0.6.0"
 val desc = "Yet Another Native Library loader and extractor for the JVM."
 val authors = arrayOf("xtrm", "lambdagg")
 val repo = "stardust-enterprises/$projectName"
@@ -43,7 +43,7 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.slf4j:slf4j-api:1.7.32")
-    implementation("fr.stardustenterprises:plat4k:1.3.0")
+    implementation("fr.stardustenterprises:plat4k:1.4.0")
 
     testImplementation(kotlin("test"))
 }
