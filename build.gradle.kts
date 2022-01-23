@@ -103,17 +103,22 @@ tasks {
 
     /* Artifacts */
 
-    // Main artifact, already containing the 'main' output. We're adding the API source output.
+    // The original artifact, we just have to add the API source output and the
+    // LICENSE file.
     jar {
         from(sourceSets["api"].output)
+        from("LICENSE")
     }
 
-    // API artifact, only including the output of the API source.
+    // API artifact, only including the output of the API source and the
+    // LICENSE file.
     create("apiJar", Jar::class) {
         group = "build"
 
         archiveClassifier.set("api")
         from(sourceSets["api"].output)
+
+        from("LICENSE")
     }
 
     // Source artifact, including everything the 'main' does but not compiled.
@@ -123,15 +128,19 @@ tasks {
         archiveClassifier.set("sources")
         from(sourceSets["main"].allSource)
         from(sourceSets["api"].allSource)
+
+        from("LICENSE")
     }
 
-    // Javadoc artifact, including everything Dokka creates.
+    // The Javadoc artifact, containing the Dokka output and the LICENSE file.
     create("javadocJar", Jar::class) {
         group = "build"
 
         archiveClassifier.set("javadoc")
         dependsOn(dokkaHtml)
         from(dokkaHtml)
+
+        from("LICENSE")
     }
 }
 
