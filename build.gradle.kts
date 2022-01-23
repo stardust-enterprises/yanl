@@ -42,7 +42,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation("org.slf4j:slf4j-api:1.7.32")
+    implementation("org.slf4j:slf4j-api:1.7.33")
     implementation("fr.stardustenterprises:plat4k:1.4.0")
 
     testImplementation(kotlin("test"))
