@@ -9,6 +9,14 @@ import java.nio.file.Path
  * @author xtrm
  */
 interface Extractor {
+    /**
+     * Extracts the given library to the given URI.
+     *
+     * @param libraryFile The name of the file to extract the native to.
+     * @param resourceUri The URI pointing to where the native resides.
+     *
+     * @return The path where the library was extracted to.
+     */
     @Deprecated(
         "As of 0.5.0, all 'native' functions and functions params have been renamed to 'library', and deprecated stuff is soon to be removed.",
         ReplaceWith("extractLibrary(libraryFilename, resourceUri)")

@@ -25,6 +25,9 @@ data class NativeLayout(
      */
     private val usePlatformSuffix: Boolean = true
 ) : Layout {
+    /**
+     * Companion object
+     */
     companion object {
         /**
          * A flat native layout, consisting in only the name format.
