@@ -31,7 +31,7 @@ sourceSets {
 
 group = "fr.stardustenterprises"
 val projectName = project.name
-version = "0.6.0"
+version = "0.6.1"
 val desc = "Yet Another Native Library loader and extractor for the JVM."
 val authors = arrayOf("xtrm", "lambdagg")
 val repo = "stardust-enterprises/$projectName"
@@ -42,7 +42,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation("org.slf4j:slf4j-api:1.7.32")
+    implementation("org.slf4j:slf4j-api:1.7.33")
     implementation("fr.stardustenterprises:plat4k:1.4.0")
 
     testImplementation(kotlin("test"))
@@ -103,17 +103,22 @@ tasks {
 
     /* Artifacts */
 
-    // Main artifact, already containing the 'main' output. We're adding the API source output.
+    // The original artifact, we just have to add the API source output and the
+    // LICENSE file.
     jar {
         from(sourceSets["api"].output)
+        from("LICENSE")
     }
 
-    // API artifact, only including the output of the API source.
+    // API artifact, only including the output of the API source and the
+    // LICENSE file.
     create("apiJar", Jar::class) {
         group = "build"
 
         archiveClassifier.set("api")
         from(sourceSets["api"].output)
+
+        from("LICENSE")
     }
 
     // Source artifact, including everything the 'main' does but not compiled.
@@ -123,15 +128,19 @@ tasks {
         archiveClassifier.set("sources")
         from(sourceSets["main"].allSource)
         from(sourceSets["api"].allSource)
+
+        from("LICENSE")
     }
 
-    // Javadoc artifact, including everything Dokka creates.
+    // The Javadoc artifact, containing the Dokka output and the LICENSE file.
     create("javadocJar", Jar::class) {
         group = "build"
 
         archiveClassifier.set("javadoc")
         dependsOn(dokkaHtml)
         from(dokkaHtml)
+
+        from("LICENSE")
     }
 }
 
