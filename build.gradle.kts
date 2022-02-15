@@ -31,7 +31,7 @@ sourceSets {
 
 group = "fr.stardustenterprises"
 val projectName = project.name
-version = "0.7.0"
+version = "0.7.1"
 val desc = "Yet Another Native Library loader and extractor for the JVM."
 val authors = arrayOf("xtrm", "lambdagg")
 val repo = "stardust-enterprises/$projectName"
