@@ -22,7 +22,10 @@ class TempExtractor : Extractor {
         libraryFile: String,
         resourceUri: URI
     ): Path {
-        val path = tempDir.resolve(libraryFile)
+        val resPath = resourceUri.toString()
+        val index = resPath.lastIndexOf('.')
+        val ext = if(index == -1) "" else resPath.substring(index)
+        val path = tempDir.resolve(libraryFile + ext)
 
         if (!Files.exists(path)) {
             Files.copy(resourceUri.toURL().openStream(), path)
