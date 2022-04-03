@@ -24,6 +24,10 @@ class NativeLoader private constructor(
         }
 
         if (uri == null) {
+            context.osName
+        }
+
+        if (uri == null) {
             if (!isOptional) {
                 throw NativeNotFoundException(libraryName)
             }
