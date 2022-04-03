@@ -35,7 +35,7 @@ class PlatformContext : Context {
         }
     }
 
-    override val osName = platform.operatingSystem.osName
+    override val osName = platform.operatingSystem.aliases[0]
     override val archIdentifier = platform.architecture.identifier
     override val is64Bits = platform.architecture.cpuType == EnumCPUType.X64
 

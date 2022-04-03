@@ -12,7 +12,7 @@ class NativeLoader private constructor(
     private val root: String,
     private val layout: Layout,
     private val extractor: Extractor,
-    private val context: Context
+    private val context: Context,
 ) : Loader {
     override fun loadLibrary(libraryName: String, isOptional: Boolean) {
         var uri = layout.locateLibrary(root, libraryName, context)
@@ -59,7 +59,7 @@ class NativeLoader private constructor(
          * The `context` value, following the [NativeLoader.context]
          * definition.
          */
-        var context: Context = PlatformContext()
+        var context: Context = PlatformContext(),
     ) {
         /**
          * Sets the [root] value to the given one.
@@ -99,7 +99,7 @@ class NativeLoader private constructor(
         fun layout(
             pattern: String,
             usePrefix: Boolean = true,
-            useSuffix: Boolean = true
+            useSuffix: Boolean = true,
         ): Builder =
             layout(NativeLayout(pattern, usePrefix, useSuffix))
 
