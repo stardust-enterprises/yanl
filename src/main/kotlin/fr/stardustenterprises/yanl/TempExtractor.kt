@@ -16,7 +16,9 @@ class TempExtractor : Extractor {
     /**
      * The temporary directory where the YANL natives will reside.
      */
-    private val tempDir = Files.createTempDirectory("yanl_natives")
+    private val tempDir by lazy {
+        Files.createTempDirectory("yanl_natives")
+    }
 
     override fun extractLibrary(
         libraryFile: String,
