@@ -14,10 +14,8 @@ sourceSets {
     val test by getting
 
     val api by creating {
-        java {
-            srcDir("src/api/kotlin")
-            resources.srcDir("src/api/resources")
-        }
+        java.srcDir("src/api/kotlin")
+        resources.srcDir("src/api/resources")
 
         this.compileClasspath += main.compileClasspath
         this.runtimeClasspath += main.runtimeClasspath
@@ -29,14 +27,16 @@ sourceSets {
     }
 }
 
-group = "fr.stardustenterprises"
 val projectName = project.name
-version = "0.7.1"
+group = "fr.stardustenterprises"
+version = "0.7.2"
+
 val desc = "Yet Another Native Library loader and extractor for the JVM."
 val authors = arrayOf("xtrm", "lambdagg")
 val repo = "stardust-enterprises/$projectName"
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
