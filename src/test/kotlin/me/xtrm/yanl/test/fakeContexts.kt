@@ -9,7 +9,7 @@ import fr.stardustenterprises.yanl.api.Context
  */
 class FakeLinuxContext(arch: EnumArchitecture): Context {
     override val osName = EnumOperatingSystem.LINUX.osName
-    override val archIdentifier = arch.identifier
+    override val archIdentifiers = arch.aliases
     override val is64Bits = true
 
     override fun mapLibraryName(
@@ -24,7 +24,7 @@ class FakeLinuxContext(arch: EnumArchitecture): Context {
  */
 class FakeWindowsContext(arch: EnumArchitecture): Context {
     override val osName = EnumOperatingSystem.WINDOWS.osName
-    override val archIdentifier = arch.identifier
+    override val archIdentifiers = arch.aliases
     override val is64Bits = true
 
     override fun mapLibraryName(

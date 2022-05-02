@@ -29,7 +29,7 @@ interface Context {
     /**
      * The architecture's identifier in the current context.
      */
-    val archIdentifier: String
+    val archIdentifiers: Array<String>
 
     /**
      * Whether the current context is 64-bits capable.
@@ -48,7 +48,7 @@ interface Context {
     fun mapLibraryName(
         name: String,
         usePlatformPrefix: Boolean,
-        usePlatformSuffix: Boolean
+        usePlatformSuffix: Boolean,
     ): String
 
     /**
@@ -63,11 +63,13 @@ interface Context {
      */
     fun format(
         pathFormat: String,
-        name: String
-    ): String =
-        pathFormat
-            .replace(OS_FORMAT, osName, ignoreCase = true)
-            .replace(ARCH_FORMAT, archIdentifier, ignoreCase = true)
-            .lowercase()
-            .replace(NAME_FORMAT, name, ignoreCase = true)
+        name: String,
+    ): Array<String> =
+        archIdentifiers.map { archIdentifier ->
+            pathFormat
+                .replace(OS_FORMAT, osName, ignoreCase = true)
+                .replace(ARCH_FORMAT, archIdentifier, ignoreCase = true)
+                .lowercase()
+                .replace(NAME_FORMAT, name, ignoreCase = true)
+        }.toTypedArray()
 }

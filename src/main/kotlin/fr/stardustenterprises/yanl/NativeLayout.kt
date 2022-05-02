@@ -49,14 +49,6 @@ data class NativeLayout(
         libraryName: String,
         context: Context
     ): URI? {
-        val mappedLibraryName = context.mapLibraryName(
-            libraryName,
-            this.usePlatformPrefix,
-            this.usePlatformSuffix
-        )
-
-        val formattedPath = context.format(this.pathFormat, mappedLibraryName)
-
         var libraryPath = ""
 
         if (!rootPath.startsWith('/'))
@@ -65,8 +57,16 @@ data class NativeLayout(
 
         if (!rootPath.endsWith('/'))
             libraryPath += "/"
-        libraryPath += formattedPath
 
-        return javaClass.getResource(libraryPath)?.toURI()
+        return context.format(
+            this.pathFormat,
+            context.mapLibraryName(
+                libraryName,
+                this.usePlatformPrefix,
+                this.usePlatformSuffix
+            ),
+        )
+            .map { libraryPath + it }
+            .firstNotNullOfOrNull { javaClass.getResource(it)?.toURI() }
     }
 }
