@@ -1,0 +1,57 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:fr.stardustenterprises.yanl.api////PointingToDeclaration/yanl/fr.stardustenterprises.yanl.api/index.html
+$dokka.location:fr.stardustenterprises.yanl.api//ARCH_FORMAT/#/PointingToDeclaration/yanl/fr.stardustenterprises.yanl.api/-a-r-c-h_-f-o-r-m-a-t.html
+$dokka.location:fr.stardustenterprises.yanl.api//NAME_FORMAT/#/PointingToDeclaration/yanl/fr.stardustenterprises.yanl.api/-n-a-m-e_-f-o-r-m-a-t.html
+$dokka.location:fr.stardustenterprises.yanl.api//OS_FORMAT/#/PointingToDeclaration/yanl/fr.stardustenterprises.yanl.api/-o-s_-f-o-r-m-a-t.html
+$dokka.location:fr.stardustenterprises.yanl.api/Context///PointingToDeclaration/yanl/fr.stardustenterprises.yanl.api/-context/index.html
+$dokka.location:fr.stardustenterprises.yanl.api/Context/archIdentifiers/#/PointingToDeclaration/yanl/fr.stardustenterprises.yanl.api/-context/arch-identifiers.html
+$dokka.location:fr.stardustenterprises.yanl.api/Context/format/#kotlin.String#kotlin.String/PointingToDeclaration/yanl/fr.stardustenterprises.yanl.api/-context/format.html
+$dokka.location:fr.stardustenterprises.yanl.api/Context/is64Bits/#/PointingToDeclaration/yanl/fr.stardustenterprises.yanl.api/-context/is64-bits.html
+$dokka.location:fr.stardustenterprises.yanl.api/Context/mapLibraryName/#kotlin.String#kotlin.Boolean#kotlin.Boolean/PointingToDeclaration/yanl/fr.stardustenterprises.yanl.api/-context/map-library-name.html
+$dokka.location:fr.stardustenterprises.yanl.api/Context/osName/#/PointingToDeclaration/yanl/fr.stardustenterprises.yanl.api/-context/os-name.html
+$dokka.location:fr.stardustenterprises.yanl.api/Extractor///PointingToDeclaration/yanl/fr.stardustenterprises.yanl.api/-extractor/index.html
+$dokka.location:fr.stardustenterprises.yanl.api/Extractor/extractLibrary/#kotlin.String#java.net.URI/PointingToDeclaration/yanl/fr.stardustenterprises.yanl.api/-extractor/extract-library.html
+$dokka.location:fr.stardustenterprises.yanl.api/Extractor/extractNative/#kotlin.String#java.net.URI/PointingToDeclaration/yanl/fr.stardustenterprises.yanl.api/-extractor/extract-native.html
+$dokka.location:fr.stardustenterprises.yanl.api/Layout///PointingToDeclaration/yanl/fr.stardustenterprises.yanl.api/-layout/index.html
+$dokka.location:fr.stardustenterprises.yanl.api/Layout/locateLibrary/#kotlin.String#kotlin.String#fr.stardustenterprises.yanl.api.Context/PointingToDeclaration/yanl/fr.stardustenterprises.yanl.api/-layout/locate-library.html
+$dokka.location:fr.stardustenterprises.yanl.api/Layout/locateNative/#kotlin.String#kotlin.String#fr.stardustenterprises.yanl.api.Context/PointingToDeclaration/yanl/fr.stardustenterprises.yanl.api/-layout/locate-native.html
+$dokka.location:fr.stardustenterprises.yanl.api/Loader///PointingToDeclaration/yanl/fr.stardustenterprises.yanl.api/-loader/index.html
+$dokka.location:fr.stardustenterprises.yanl.api/Loader/loadLibrary/#kotlin.String#kotlin.Boolean/PointingToDeclaration/yanl/fr.stardustenterprises.yanl.api/-loader/load-library.html
+$dokka.location:fr.stardustenterprises.yanl.api/NativeNotFoundException///PointingToDeclaration/yanl/fr.stardustenterprises.yanl.api/-native-not-found-exception/index.html
+$dokka.location:fr.stardustenterprises.yanl.api/NativeNotFoundException/NativeNotFoundException/#kotlin.String#kotlin.String#kotlin.Throwable?/PointingToDeclaration/yanl/fr.stardustenterprises.yanl.api/-native-not-found-exception/-native-not-found-exception.html
+$dokka.location:fr.stardustenterprises.yanl.api/UnsupportedPlatformException///PointingToDeclaration/yanl/fr.stardustenterprises.yanl.api/-unsupported-platform-exception/index.html
+$dokka.location:fr.stardustenterprises.yanl.api/UnsupportedPlatformException/UnsupportedPlatformException/#kotlin.String#kotlin.Throwable?/PointingToDeclaration/yanl/fr.stardustenterprises.yanl.api/-unsupported-platform-exception/-unsupported-platform-exception.html
+$dokka.location:fr.stardustenterprises.yanl////PointingToDeclaration/yanl/fr.stardustenterprises.yanl/index.html
+$dokka.location:fr.stardustenterprises.yanl/NativeLayout.Companion///PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-native-layout/-companion/index.html
+$dokka.location:fr.stardustenterprises.yanl/NativeLayout.Companion/FLAT_LAYOUT/#/PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-native-layout/-companion/-f-l-a-t_-l-a-y-o-u-t.html
+$dokka.location:fr.stardustenterprises.yanl/NativeLayout.Companion/HIERARCHICAL_LAYOUT/#/PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-native-layout/-companion/-h-i-e-r-a-r-c-h-i-c-a-l_-l-a-y-o-u-t.html
+$dokka.location:fr.stardustenterprises.yanl/NativeLayout///PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-native-layout/index.html
+$dokka.location:fr.stardustenterprises.yanl/NativeLayout/NativeLayout/#kotlin.String#kotlin.Boolean#kotlin.Boolean/PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-native-layout/-native-layout.html
+$dokka.location:fr.stardustenterprises.yanl/NativeLayout/locateLibrary/#kotlin.String#kotlin.String#fr.stardustenterprises.yanl.api.Context/PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-native-layout/locate-library.html
+$dokka.location:fr.stardustenterprises.yanl/NativeLoader.Builder///PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-native-loader/-builder/index.html
+$dokka.location:fr.stardustenterprises.yanl/NativeLoader.Builder/Builder/#kotlin.String#fr.stardustenterprises.yanl.api.Layout#fr.stardustenterprises.yanl.api.Extractor#fr.stardustenterprises.yanl.api.Context/PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-native-loader/-builder/-builder.html
+$dokka.location:fr.stardustenterprises.yanl/NativeLoader.Builder/build/#/PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-native-loader/-builder/build.html
+$dokka.location:fr.stardustenterprises.yanl/NativeLoader.Builder/context/#/PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-native-loader/-builder/context.html
+$dokka.location:fr.stardustenterprises.yanl/NativeLoader.Builder/context/#fr.stardustenterprises.yanl.api.Context/PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-native-loader/-builder/context.html
+$dokka.location:fr.stardustenterprises.yanl/NativeLoader.Builder/extractor/#/PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-native-loader/-builder/extractor.html
+$dokka.location:fr.stardustenterprises.yanl/NativeLoader.Builder/extractor/#fr.stardustenterprises.yanl.api.Extractor/PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-native-loader/-builder/extractor.html
+$dokka.location:fr.stardustenterprises.yanl/NativeLoader.Builder/layout/#/PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-native-loader/-builder/layout.html
+$dokka.location:fr.stardustenterprises.yanl/NativeLoader.Builder/layout/#fr.stardustenterprises.yanl.api.Layout/PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-native-loader/-builder/layout.html
+$dokka.location:fr.stardustenterprises.yanl/NativeLoader.Builder/layout/#kotlin.String#kotlin.Boolean#kotlin.Boolean/PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-native-loader/-builder/layout.html
+$dokka.location:fr.stardustenterprises.yanl/NativeLoader.Builder/root/#/PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-native-loader/-builder/root.html
+$dokka.location:fr.stardustenterprises.yanl/NativeLoader.Builder/root/#kotlin.String/PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-native-loader/-builder/root.html
+$dokka.location:fr.stardustenterprises.yanl/NativeLoader///PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-native-loader/index.html
+$dokka.location:fr.stardustenterprises.yanl/NativeLoader/loadLibrary/#kotlin.String#kotlin.Boolean/PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-native-loader/load-library.html
+$dokka.location:fr.stardustenterprises.yanl/PlatformContext///PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-platform-context/index.html
+$dokka.location:fr.stardustenterprises.yanl/PlatformContext/PlatformContext/#/PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-platform-context/-platform-context.html
+$dokka.location:fr.stardustenterprises.yanl/PlatformContext/archIdentifiers/#/PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-platform-context/arch-identifiers.html
+$dokka.location:fr.stardustenterprises.yanl/PlatformContext/is64Bits/#/PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-platform-context/is64-bits.html
+$dokka.location:fr.stardustenterprises.yanl/PlatformContext/mapLibraryName/#kotlin.String#kotlin.Boolean#kotlin.Boolean/PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-platform-context/map-library-name.html
+$dokka.location:fr.stardustenterprises.yanl/PlatformContext/osName/#/PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-platform-context/os-name.html
+$dokka.location:fr.stardustenterprises.yanl/TempExtractor///PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-temp-extractor/index.html
+$dokka.location:fr.stardustenterprises.yanl/TempExtractor/TempExtractor/#/PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-temp-extractor/-temp-extractor.html
+$dokka.location:fr.stardustenterprises.yanl/TempExtractor/extractLibrary/#kotlin.String#java.net.URI/PointingToDeclaration/yanl/fr.stardustenterprises.yanl/-temp-extractor/extract-library.html
+fr.stardustenterprises.yanl
+fr.stardustenterprises.yanl.api
+
