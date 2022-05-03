@@ -11,7 +11,7 @@ plugins {
 
 val projectName = project.name
 group = "fr.stardustenterprises"
-version = "0.7.4"
+version = "0.8.0"
 
 val desc = "Yet Another Native Library loader and extractor for the JVM."
 val authors = arrayOf("xtrm", "lambdagg")
