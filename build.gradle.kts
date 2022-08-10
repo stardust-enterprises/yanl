@@ -11,7 +11,7 @@ plugins {
 
 val projectName = project.name
 group = "fr.stardustenterprises"
-version = "0.8.0"
+version = "0.8.1"
 
 val desc = "Yet Another Native Library loader and extractor for the JVM."
 val authors = arrayOf("xtrm", "lambdagg")
@@ -24,8 +24,8 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation("org.slf4j", "slf4j-api", "1.7.33")
-    implementation("fr.stardustenterprises", "plat4k", "1.6.2")
+    implementation("org.slf4j", "slf4j-api", "1.7.36")
+    implementation("fr.stardustenterprises", "plat4k", "1.6.3")
 
     testImplementation(kotlin("test"))
 }
@@ -45,6 +45,17 @@ sourceSets {
     listOf(main, test).forEach {
         it.compileClasspath += api.output
         it.runtimeClasspath += api.output
+    }
+}
+
+configurations {
+    // Makes all the configurations use the same Kotlin version.
+    all {
+        resolutionStrategy.eachDependency {
+            if (requested.group == "org.jetbrains.kotlin") {
+                useVersion(properties["kotlin.version"] as String)
+            }
+        }
     }
 }
 
@@ -190,7 +201,10 @@ publishing.publications {
         }
 
         // Configure the signing extension to sign this Maven artifact.
-        signing.sign(this)
+        signing {
+            isRequired = project.properties["signing.keyId"] != null
+            sign(this@create)
+        }
     }
 }
 
