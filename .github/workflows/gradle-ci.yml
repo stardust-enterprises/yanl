@@ -38,5 +38,5 @@ jobs:
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   publish_dir: ./build/dokka/html
-                  publish_branch: docs-${{ steps.extract_branch.outputs.branch }}
+                  publish_branch: docs/${{ steps.extract_branch.outputs.branch }}
                   force_orphan: true
